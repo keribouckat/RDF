@@ -1,26 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
+
+  /* Couleurs du logo RDF */
+  --rdf-blue: #1E40AF;
+  --rdf-blue-dark: #1E3A8A;
+  --rdf-red: #C92127;
+  --rdf-red-dark: #A01B20;
+  --rdf-yellow: #F5D033;
+  --rdf-yellow-dark: #D4B020;
+  --rdf-gold: #B8860B;
+  --rdf-light: #F8FAFC;
+  --rdf-gray: #64748B;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-rdf-blue: var(--rdf-blue);
+  --color-rdf-blue-dark: var(--rdf-blue-dark);
+  --color-rdf-red: var(--rdf-red);
+  --color-rdf-red-dark: var(--rdf-red-dark);
+  --color-rdf-yellow: var(--rdf-yellow);
+  --color-rdf-yellow-dark: var(--rdf-yellow-dark);
+  --color-rdf-gold: var(--rdf-gold);
+  --color-rdf-light: var(--rdf-light);
+  --color-rdf-gray: var(--rdf-gray);
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--rdf-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rdf-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rdf-blue-dark);
+}
+
+/* Animation classes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Section styles */
+.section-padding {
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 7rem 2rem;
+  }
 }
