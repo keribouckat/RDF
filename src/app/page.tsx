@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Pastor from "@/components/Pastor";
 import Ministries from "@/components/Ministries";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
         <About />
         <Pastor />
         <Ministries />
-        <Contact />
       </main>
       <Footer />
     </>

@@ -6,11 +6,11 @@ import Image from "next/image";
 import { useState } from "react";
 
 const donationOptions = [
-  { amount: 10, label: "10€" },
-  { amount: 25, label: "25€" },
-  { amount: 50, label: "50€" },
-  { amount: 100, label: "100€" },
-  { amount: 250, label: "250€" },
+  { amount: 5000, label: "5 000 FCFA" },
+  { amount: 10000, label: "10 000 FCFA" },
+  { amount: 25000, label: "25 000 FCFA" },
+  { amount: 50000, label: "50 000 FCFA" },
+  { amount: 100000, label: "100 000 FCFA" },
 ];
 
 const projects = [
@@ -24,27 +24,32 @@ const projects = [
     title: "La Joie en Partage",
     description: "Actions humanitaires pour les plus demunis : nourriture, vetements, education.",
     image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
-    color: "from-rdf-yellow-dark to-rdf-gold",
+    color: "from-rdf-gold-dark to-rdf-gold",
   },
   {
     title: "Evangelisation & Missions",
     description: "Soutenir les campagnes d'evangelisation et l'expansion de l'oeuvre de Dieu.",
     image: "https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=800&auto=format&fit=crop",
-    color: "from-rdf-blue to-rdf-blue-dark",
+    color: "from-rdf-red to-rdf-red-dark",
   },
 ];
 
 export default function DonsPage() {
-  const [selectedAmount, setSelectedAmount] = useState(50);
+  const [selectedAmount, setSelectedAmount] = useState(25000);
   const [customAmount, setCustomAmount] = useState("");
   const [donationType, setDonationType] = useState<"unique" | "mensuel">("unique");
+  const [paymentMethod, setPaymentMethod] = useState<"airtel" | "moov">("airtel");
+
+  const formatCFA = (amount: number) => {
+    return new Intl.NumberFormat('fr-FR').format(amount) + ' FCFA';
+  };
 
   return (
     <>
       <Header />
       <main className="min-h-screen bg-rdf-light">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-rdf-blue to-rdf-blue-dark text-white pt-32 pb-20 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-rdf-red to-rdf-red-dark text-white pt-32 pb-20 overflow-hidden">
           <div className="absolute inset-0">
             <Image
               src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2000&auto=format&fit=crop"
@@ -56,7 +61,7 @@ export default function DonsPage() {
           <div className="max-w-6xl mx-auto px-4 text-center">
             <div className="mb-6">
               <svg
-                className="w-16 h-16 mx-auto text-rdf-yellow"
+                className="w-16 h-16 mx-auto text-rdf-gold"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -75,7 +80,7 @@ export default function DonsPage() {
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-4">
               Votre generosite permet de transformer des vies et d&apos;etendre le Royaume de Dieu.
             </p>
-            <blockquote className="text-lg italic text-rdf-yellow max-w-2xl mx-auto">
+            <blockquote className="text-lg italic text-rdf-gold max-w-2xl mx-auto">
               &ldquo;Donnez, et il vous sera donne; on versera dans votre sein une bonne mesure.&rdquo;
               <cite className="block text-white/70 text-sm mt-2 not-italic">- Luc 6:38</cite>
             </blockquote>
@@ -86,7 +91,7 @@ export default function DonsPage() {
         <section className="section-padding">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-rdf-blue-dark mb-4">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-rdf-red-dark mb-4">
                 Nos Projets
               </h2>
               <p className="text-rdf-gray text-lg max-w-2xl mx-auto">
@@ -110,7 +115,7 @@ export default function DonsPage() {
                     <div className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-70`} />
                   </div>
                   <div className="p-6">
-                    <h3 className="font-serif text-xl font-bold text-rdf-blue-dark mb-3">
+                    <h3 className="font-serif text-xl font-bold text-rdf-red-dark mb-3">
                       {project.title}
                     </h3>
                     <p className="text-rdf-gray text-sm leading-relaxed">
@@ -123,7 +128,7 @@ export default function DonsPage() {
 
             {/* Donation Form */}
             <div className="bg-white rounded-3xl shadow-lg p-8 md:p-12 max-w-3xl mx-auto">
-              <h2 className="font-serif text-3xl font-bold text-rdf-blue-dark mb-8 text-center">
+              <h2 className="font-serif text-3xl font-bold text-rdf-red-dark mb-8 text-center">
                 Faire un Don
               </h2>
 
@@ -137,8 +142,8 @@ export default function DonsPage() {
                     onClick={() => setDonationType("unique")}
                     className={`flex-1 py-3 rounded-xl font-semibold transition-all ${
                       donationType === "unique"
-                        ? "bg-rdf-blue text-white"
-                        : "bg-rdf-light text-rdf-gray hover:bg-rdf-blue/10"
+                        ? "bg-rdf-red text-white"
+                        : "bg-rdf-light text-rdf-gray hover:bg-rdf-red/10"
                     }`}
                   >
                     Don unique
@@ -147,8 +152,8 @@ export default function DonsPage() {
                     onClick={() => setDonationType("mensuel")}
                     className={`flex-1 py-3 rounded-xl font-semibold transition-all ${
                       donationType === "mensuel"
-                        ? "bg-rdf-blue text-white"
-                        : "bg-rdf-light text-rdf-gray hover:bg-rdf-blue/10"
+                        ? "bg-rdf-red text-white"
+                        : "bg-rdf-light text-rdf-gray hover:bg-rdf-red/10"
                     }`}
                   >
                     Don mensuel
@@ -161,7 +166,7 @@ export default function DonsPage() {
                 <label className="block text-sm font-medium text-rdf-gray mb-3">
                   Montant
                 </label>
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mb-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
                   {donationOptions.map((option) => (
                     <button
                       key={option.amount}
@@ -169,10 +174,10 @@ export default function DonsPage() {
                         setSelectedAmount(option.amount);
                         setCustomAmount("");
                       }}
-                      className={`py-3 rounded-xl font-semibold transition-all ${
+                      className={`py-3 px-2 rounded-xl font-semibold transition-all text-sm ${
                         selectedAmount === option.amount && !customAmount
-                          ? "bg-rdf-blue text-white"
-                          : "bg-rdf-light text-rdf-gray hover:bg-rdf-blue/10"
+                          ? "bg-rdf-red text-white"
+                          : "bg-rdf-light text-rdf-gray hover:bg-rdf-red/10"
                       }`}
                     >
                       {option.label}
@@ -188,60 +193,97 @@ export default function DonsPage() {
                       setCustomAmount(e.target.value);
                       setSelectedAmount(0);
                     }}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rdf-blue focus:ring-2 focus:ring-rdf-blue/20 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rdf-red focus:ring-2 focus:ring-rdf-red/20 outline-none"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-rdf-gray">€</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-rdf-gray">FCFA</span>
                 </div>
               </div>
 
-              {/* Payment Methods */}
+              {/* Payment Methods - Mobile Money Only */}
               <div className="mb-8">
                 <label className="block text-sm font-medium text-rdf-gray mb-3">
                   Methode de paiement
                 </label>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 p-4 border-2 border-rdf-blue rounded-xl bg-rdf-blue/5">
-                    <input type="radio" name="payment" id="bank" defaultChecked className="w-5 h-5 text-rdf-blue" />
-                    <label htmlFor="bank" className="flex-1 cursor-pointer">
-                      <div className="font-semibold text-rdf-blue-dark">Virement bancaire</div>
-                      <div className="text-sm text-rdf-gray">IBAN fourni apres validation</div>
+                  <div
+                    onClick={() => setPaymentMethod("airtel")}
+                    className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-colors ${
+                      paymentMethod === "airtel"
+                        ? "border-rdf-red bg-rdf-red/5"
+                        : "border-gray-200 hover:border-rdf-red"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="airtel"
+                      checked={paymentMethod === "airtel"}
+                      onChange={() => setPaymentMethod("airtel")}
+                      className="w-5 h-5 text-rdf-red"
+                    />
+                    <div className="w-14 h-14 relative flex-shrink-0">
+                      <Image
+                        src="/logo-app-myairtel.png"
+                        alt="Airtel Money"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <label htmlFor="airtel" className="flex-1 cursor-pointer">
+                      <div className="font-semibold text-rdf-red-dark">Airtel Money</div>
+                      <div className="text-sm text-rdf-gray">Paiement mobile securise</div>
                     </label>
                   </div>
-                  <div className="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:border-rdf-blue transition-colors">
-                    <input type="radio" name="payment" id="paypal" className="w-5 h-5 text-rdf-blue" />
-                    <label htmlFor="paypal" className="flex-1 cursor-pointer">
-                      <div className="font-semibold text-rdf-blue-dark">PayPal</div>
-                      <div className="text-sm text-rdf-gray">Paiement securise</div>
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:border-rdf-blue transition-colors">
-                    <input type="radio" name="payment" id="mobile" className="w-5 h-5 text-rdf-blue" />
-                    <label htmlFor="mobile" className="flex-1 cursor-pointer">
-                      <div className="font-semibold text-rdf-blue-dark">Mobile Money</div>
-                      <div className="text-sm text-rdf-gray">Pour nos freres et soeurs en Afrique</div>
+                  <div
+                    onClick={() => setPaymentMethod("moov")}
+                    className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-colors ${
+                      paymentMethod === "moov"
+                        ? "border-rdf-red bg-rdf-red/5"
+                        : "border-gray-200 hover:border-rdf-red"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="moov"
+                      checked={paymentMethod === "moov"}
+                      onChange={() => setPaymentMethod("moov")}
+                      className="w-5 h-5 text-rdf-red"
+                    />
+                    <div className="w-14 h-14 relative flex-shrink-0">
+                      <Image
+                        src="/logo-app-moov-money.png"
+                        alt="Moov Money"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <label htmlFor="moov" className="flex-1 cursor-pointer">
+                      <div className="font-semibold text-rdf-red-dark">Moov Money</div>
+                      <div className="text-sm text-rdf-gray">Paiement mobile securise</div>
                     </label>
                   </div>
                 </div>
               </div>
 
               {/* Submit Button */}
-              <button className="w-full py-4 bg-rdf-blue text-white font-semibold rounded-xl hover:bg-rdf-blue-dark transition-colors shadow-lg hover:shadow-xl">
-                Proceder au don de {customAmount || selectedAmount}€
+              <button className="w-full py-4 bg-rdf-red text-white font-semibold rounded-xl hover:bg-rdf-red-dark transition-colors shadow-lg hover:shadow-xl">
+                Proceder au don de {formatCFA(customAmount ? parseInt(customAmount) : selectedAmount)}
               </button>
 
               <p className="text-center text-sm text-rdf-gray mt-6">
-                Vos dons sont deductibles d&apos;impots selon la legislation en vigueur.
+                Que Dieu vous benisse pour votre generosite !
               </p>
             </div>
 
-            {/* Tax Information */}
-            <div className="mt-12 bg-gradient-to-r from-rdf-yellow-dark/20 to-rdf-gold/20 rounded-2xl p-8 text-center">
-              <h3 className="font-serif text-2xl font-bold text-rdf-blue-dark mb-4">
-                Recu fiscal
+            {/* Contact Information */}
+            <div className="mt-12 bg-gradient-to-r from-rdf-gold-dark/20 to-rdf-gold/20 rounded-2xl p-8 text-center">
+              <h3 className="font-serif text-2xl font-bold text-rdf-red-dark mb-4">
+                Besoin d&apos;aide ?
               </h3>
               <p className="text-rdf-gray max-w-2xl mx-auto">
-                Un recu fiscal vous sera automatiquement envoye par email apres votre don.
-                En France, vous beneficiez d&apos;une reduction d&apos;impot de 66% du montant de votre don.
+                Pour toute question concernant les dons ou pour effectuer un don d&apos;un montant plus important,
+                n&apos;hesitez pas a nous contacter directement.
               </p>
             </div>
           </div>

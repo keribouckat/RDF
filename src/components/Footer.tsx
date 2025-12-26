@@ -5,71 +5,88 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-br from-rdf-blue-dark to-rdf-blue text-white">
-      <div className="max-w-6xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-rdf-gray-900 text-white">
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Logo & Description */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
               <Image
                 src="/logo.png"
                 alt="Restauration des Familles"
-                width={60}
-                height={60}
-                className="w-14 h-14"
+                width={56}
+                height={56}
+                className="w-12 h-12 sm:w-14 sm:h-14 transition-transform duration-300 group-hover:scale-105"
               />
               <div>
-                <h3 className="font-serif text-xl font-bold">Restauration des Familles</h3>
-                <p className="text-white/70 text-sm">Une Eglise, Une Famille, Un Amour</p>
+                <h3 className="font-serif text-lg font-bold text-white">RDF</h3>
+                <p className="text-rdf-gold text-xs font-medium">Restauration des Familles</p>
               </div>
-            </div>
-            <p className="text-white/80 text-sm leading-relaxed max-w-md">
+            </Link>
+            <p className="text-rdf-gray-400 text-sm leading-relaxed max-w-xs">
               Notre mission est de voir des familles restaurees par la puissance de l&apos;Evangile,
-              vivant dans l&apos;unite et l&apos;amour de Christ. Rejoignez-nous dans cette aventure de foi.
+              vivant dans l&apos;unite et l&apos;amour de Christ.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif text-lg font-semibold mb-6">Liens rapides</h4>
+            <h4 className="font-semibold text-white mb-4 sm:mb-6">Navigation</h4>
             <ul className="space-y-3">
-              <li>
-                <Link href="#accueil" className="text-white/80 hover:text-rdf-yellow transition-colors text-sm">
-                  Accueil
-                </Link>
+              {[
+                { href: '/', label: 'Accueil' },
+                { href: '/live', label: 'Live Streaming' },
+                { href: '/librairie', label: 'Librairie' },
+                { href: '/dons', label: 'Faire un don' },
+                { href: '/contact', label: 'Contact' },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-rdf-gray-400 hover:text-rdf-gold text-sm transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="font-semibold text-white mb-4 sm:mb-6">Contact</h4>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-3 text-rdf-gray-400">
+                <svg className="w-5 h-5 text-rdf-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>Libreville, Gabon</span>
               </li>
               <li>
-                <Link href="#apropos" className="text-white/80 hover:text-rdf-yellow transition-colors text-sm">
-                  Notre Vision
-                </Link>
-              </li>
-              <li>
-                <Link href="#pasteur" className="text-white/80 hover:text-rdf-yellow transition-colors text-sm">
-                  Le Pasteur
-                </Link>
-              </li>
-              <li>
-                <Link href="#ministeres" className="text-white/80 hover:text-rdf-yellow transition-colors text-sm">
-                  Ministeres
-                </Link>
-              </li>
-              <li>
-                <Link href="#contact" className="text-white/80 hover:text-rdf-yellow transition-colors text-sm">
-                  Contact
-                </Link>
+                <a
+                  href="mailto:contact@restaurationdesfamilles.org"
+                  className="flex items-start gap-3 text-rdf-gray-400 hover:text-rdf-gold transition-colors"
+                >
+                  <svg className="w-5 h-5 text-rdf-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span className="break-all">contact@restaurationdesfamilles.org</span>
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Social & Contact */}
+          {/* Social & Newsletter */}
           <div>
-            <h4 className="font-serif text-lg font-semibold mb-6">Suivez-nous</h4>
+            <h4 className="font-semibold text-white mb-4 sm:mb-6">Suivez-nous</h4>
             <div className="flex gap-3 mb-6">
               <a
                 href="https://www.facebook.com/share/16yRSuULj8/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
+                className="w-10 h-10 bg-rdf-gray-800 hover:bg-rdf-red rounded-xl flex items-center justify-center transition-all duration-200"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -80,7 +97,7 @@ export default function Footer() {
                 href="https://www.instagram.com/philippe_mukoma"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
+                className="w-10 h-10 bg-rdf-gray-800 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 rounded-xl flex items-center justify-center transition-all duration-200"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -91,7 +108,7 @@ export default function Footer() {
                 href="https://www.youtube.com/@restaurationdesfamilles"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
+                className="w-10 h-10 bg-rdf-gray-800 hover:bg-red-600 rounded-xl flex items-center justify-center transition-all duration-200"
                 aria-label="YouTube"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -99,20 +116,27 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
-            <p className="text-white/70 text-sm">
-              contact@restaurationdesfamilles.org
-            </p>
+
+            {/* Horaires */}
+            <div className="text-sm">
+              <p className="text-rdf-gray-400 mb-2">Cultes :</p>
+              <p className="text-white">Dimanche 10h00</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/60 text-sm">
-            &copy; {currentYear} Restauration des Familles. Tous droits reserves.
-          </p>
-          <p className="text-white/60 text-sm italic">
-            &ldquo;A Dieu seul soit la gloire&rdquo;
-          </p>
+      {/* Bottom bar */}
+      <div className="border-t border-rdf-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+            <p className="text-rdf-gray-500">
+              &copy; {currentYear} Restauration des Familles. Tous droits reserves.
+            </p>
+            <p className="text-rdf-gold italic font-serif">
+              &ldquo;A Dieu seul soit la gloire&rdquo;
+            </p>
+          </div>
         </div>
       </div>
     </footer>

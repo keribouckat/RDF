@@ -1,34 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #1a1a1a;
 
-  /* Couleurs du logo RDF */
-  --rdf-blue: #1E40AF;
-  --rdf-blue-dark: #1E3A8A;
-  --rdf-red: #C92127;
-  --rdf-red-dark: #A01B20;
-  --rdf-yellow: #F5D033;
-  --rdf-yellow-dark: #D4B020;
-  --rdf-gold: #B8860B;
-  --rdf-light: #F8FAFC;
-  --rdf-gray: #64748B;
+  /* Palette Rouge & Or - Couleurs principales */
+  --rdf-red: #B91C1C;
+  --rdf-red-light: #DC2626;
+  --rdf-red-dark: #991B1B;
+  --rdf-red-darker: #7F1D1D;
+
+  --rdf-gold: #D4AF37;
+  --rdf-gold-light: #F5D033;
+  --rdf-gold-dark: #B8860B;
+  --rdf-gold-darker: #8B6914;
+
+  /* Couleurs neutres */
+  --rdf-white: #FFFFFF;
+  --rdf-light: #FAFAFA;
+  --rdf-gray-50: #F9FAFB;
+  --rdf-gray-100: #F3F4F6;
+  --rdf-gray-200: #E5E7EB;
+  --rdf-gray-300: #D1D5DB;
+  --rdf-gray-400: #9CA3AF;
+  --rdf-gray-500: #6B7280;
+  --rdf-gray-600: #4B5563;
+  --rdf-gray-700: #374151;
+  --rdf-gray-800: #1F2937;
+  --rdf-gray-900: #111827;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-rdf-blue: var(--rdf-blue);
-  --color-rdf-blue-dark: var(--rdf-blue-dark);
+
+  /* Rouge */
   --color-rdf-red: var(--rdf-red);
+  --color-rdf-red-light: var(--rdf-red-light);
   --color-rdf-red-dark: var(--rdf-red-dark);
-  --color-rdf-yellow: var(--rdf-yellow);
-  --color-rdf-yellow-dark: var(--rdf-yellow-dark);
+  --color-rdf-red-darker: var(--rdf-red-darker);
+
+  /* Or */
   --color-rdf-gold: var(--rdf-gold);
+  --color-rdf-gold-light: var(--rdf-gold-light);
+  --color-rdf-gold-dark: var(--rdf-gold-dark);
+  --color-rdf-gold-darker: var(--rdf-gold-darker);
+
+  /* Neutres */
+  --color-rdf-white: var(--rdf-white);
   --color-rdf-light: var(--rdf-light);
-  --color-rdf-gray: var(--rdf-gray);
+  --color-rdf-gray-50: var(--rdf-gray-50);
+  --color-rdf-gray-100: var(--rdf-gray-100);
+  --color-rdf-gray-200: var(--rdf-gray-200);
+  --color-rdf-gray-300: var(--rdf-gray-300);
+  --color-rdf-gray-400: var(--rdf-gray-400);
+  --color-rdf-gray-500: var(--rdf-gray-500);
+  --color-rdf-gray-600: var(--rdf-gray-600);
+  --color-rdf-gray-700: var(--rdf-gray-700);
+  --color-rdf-gray-800: var(--rdf-gray-800);
+  --color-rdf-gray-900: var(--rdf-gray-900);
+
+  /* Fonts */
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', sans-serif;
 }
@@ -37,6 +70,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -54,16 +89,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--rdf-light);
+  background: var(--rdf-gray-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--rdf-blue);
+  background: var(--rdf-gold);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--rdf-blue-dark);
+  background: var(--rdf-gold-dark);
 }
 
 /* Animation classes */
@@ -78,6 +113,33 @@ html {
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -87,21 +149,122 @@ html {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Section styles */
+/* Delay utilities */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Section styles - Mobile First */
 .section-padding {
-  padding: 5rem 1.5rem;
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding: 5rem 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
   .section-padding {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
     padding: 7rem 2rem;
   }
+}
+
+/* Elegant shadows */
+.shadow-soft {
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-medium {
+  box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-strong {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 20px 50px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--rdf-gold-light) 0%, var(--rdf-gold) 50%, var(--rdf-gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Red gradient text */
+.text-gradient-red {
+  background: linear-gradient(135deg, var(--rdf-red-light) 0%, var(--rdf-red) 50%, var(--rdf-red-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Focus ring for accessibility */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--rdf-gold);
+  outline-offset: 2px;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Selection color */
+::selection {
+  background: var(--rdf-gold);
+  color: var(--rdf-gray-900);
 }

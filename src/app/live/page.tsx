@@ -36,7 +36,7 @@ const recentVideos = [
     date: "Dimanche dernier",
     duration: "1h 45min",
     thumbnail: "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop",
-    color: "from-rdf-blue to-rdf-blue-dark",
+    color: "from-rdf-red to-rdf-red-dark",
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ const recentVideos = [
     date: "Il y a 2 semaines",
     duration: "1h 30min",
     thumbnail: "https://images.unsplash.com/photo-1476234251651-f353703a034d?q=80&w=600&auto=format&fit=crop",
-    color: "from-rdf-yellow-dark to-rdf-gold",
+    color: "from-rdf-gold-dark to-rdf-gold",
   },
   {
     id: 4,
@@ -87,43 +87,82 @@ export default function LivePage() {
     <>
       <Header />
       <main className="min-h-screen bg-rdf-light">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-rdf-blue to-rdf-blue-dark text-white pt-32 pb-20 overflow-hidden">
+        {/* Hero Section with Video Background */}
+        <section className="relative bg-gradient-to-br from-rdf-red to-rdf-red-dark text-white pt-32 pb-20 overflow-hidden min-h-[60vh] flex items-center">
+          {/* Video Background */}
           <div className="absolute inset-0">
-            <Image
-              src="https://images.unsplash.com/photo-1598387993841-f4645274d0db?q=80&w=2000&auto=format&fit=crop"
-              alt="Live Streaming"
-              fill
-              className="object-cover"
-              priority
-              unoptimized
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-rdf-blue/60 to-rdf-blue-dark/70" />
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              poster="https://images.unsplash.com/photo-1598387993841-f4645274d0db?q=80&w=2000&auto=format&fit=crop"
+            >
+              {/* Video from Pexels - Church worship */}
+              <source src="https://videos.pexels.com/video-files/2022396/2022396-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+              {/* Fallback image if video doesn't load */}
+              <Image
+                src="https://images.unsplash.com/photo-1598387993841-f4645274d0db?q=80&w=2000&auto=format&fit=crop"
+                alt="Live Streaming"
+                fill
+                className="object-cover"
+              />
+            </video>
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-rdf-red/80 to-rdf-red-dark/85" />
           </div>
-          <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
+
+          <div className="relative z-10 max-w-6xl mx-auto px-4 text-center w-full">
             <div className="mb-6">
               <div className="relative inline-block">
-                <svg
-                  className="w-16 h-16 mx-auto text-rdf-yellow"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
+                <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto">
+                  <svg
+                    className="w-10 h-10 text-rdf-gold"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
                 {isLive && (
-                  <span className="absolute -top-2 -right-2 flex h-4 w-4">
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+                    <span className="relative inline-flex rounded-full h-5 w-5 bg-red-500 border-2 border-white"></span>
                   </span>
                 )}
               </div>
             </div>
-            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg">
               Live Streaming
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-md">
               Rejoignez-nous en direct pour les cultes et enseignements, ou revisionnez nos messages precedents.
             </p>
+
+            {/* Quick access buttons */}
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://www.youtube.com/@restaurationdesfamilles"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-rdf-red-dark font-semibold rounded-full hover:bg-rdf-gold hover:text-white transition-all shadow-lg"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Regarder sur YouTube
+              </a>
+              <a
+                href="#programme"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-rdf-red-dark transition-all"
+              >
+                Voir le programme
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </section>
 
@@ -145,7 +184,7 @@ export default function LivePage() {
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="aspect-video bg-black relative">
                 {/* YouTube Embed Placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-rdf-blue-dark/80 to-rdf-blue/80 backdrop-blur-sm">
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-rdf-red-dark/80 to-rdf-red/80 backdrop-blur-sm">
                   <div className="text-center text-white p-8">
                     <svg
                       className="w-24 h-24 mx-auto mb-6 opacity-50"
@@ -191,7 +230,7 @@ export default function LivePage() {
               </div>
 
               <div className="p-6 border-t">
-                <h2 className="font-serif text-2xl font-bold text-rdf-blue-dark mb-2">
+                <h2 className="font-serif text-2xl font-bold text-rdf-red-dark mb-2">
                   Culte en Direct
                 </h2>
                 <p className="text-rdf-gray">
@@ -201,8 +240,8 @@ export default function LivePage() {
             </div>
 
             {/* Schedule */}
-            <div className="mt-16">
-              <h2 className="font-serif text-3xl font-bold text-rdf-blue-dark mb-8 text-center">
+            <div id="programme" className="mt-16 scroll-mt-24">
+              <h2 className="font-serif text-3xl font-bold text-rdf-red-dark mb-8 text-center">
                 Programme des Directs
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -212,17 +251,17 @@ export default function LivePage() {
                     className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
                   >
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-rdf-blue/10 rounded-xl flex items-center justify-center">
-                        <svg className="w-6 h-6 text-rdf-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-12 h-12 bg-rdf-red/10 rounded-xl flex items-center justify-center">
+                        <svg className="w-6 h-6 text-rdf-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
                       <div>
-                        <div className="font-semibold text-rdf-blue-dark">{event.day}</div>
+                        <div className="font-semibold text-rdf-red-dark">{event.day}</div>
                         <div className="text-sm text-rdf-gray">{event.time}</div>
                       </div>
                     </div>
-                    <h3 className="font-serif text-xl font-bold text-rdf-blue-dark mb-2">
+                    <h3 className="font-serif text-xl font-bold text-rdf-red-dark mb-2">
                       {event.title}
                     </h3>
                     <p className="text-rdf-gray text-sm">
@@ -243,7 +282,7 @@ export default function LivePage() {
 
             {/* Recent Videos */}
             <div className="mt-16">
-              <h2 className="font-serif text-3xl font-bold text-rdf-blue-dark mb-8 text-center">
+              <h2 className="font-serif text-3xl font-bold text-rdf-red-dark mb-8 text-center">
                 Replays Recents
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -262,7 +301,7 @@ export default function LivePage() {
                       <div className={`absolute inset-0 bg-gradient-to-t ${video.color} opacity-60 group-hover:opacity-50 transition-opacity`} />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <svg className="w-8 h-8 text-rdf-blue-dark ml-1" fill="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-8 h-8 text-rdf-red-dark ml-1" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" />
                           </svg>
                         </div>
@@ -272,7 +311,7 @@ export default function LivePage() {
                       </span>
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold text-rdf-blue-dark mb-2 group-hover:text-rdf-blue transition-colors">
+                      <h3 className="font-semibold text-rdf-red-dark mb-2 group-hover:text-rdf-red transition-colors">
                         {video.title}
                       </h3>
                       <p className="text-rdf-gray text-sm">{video.date}</p>
@@ -297,7 +336,7 @@ export default function LivePage() {
             </div>
 
             {/* Subscribe Section */}
-            <div className="mt-16 bg-gradient-to-r from-rdf-blue to-rdf-blue-dark rounded-3xl p-8 md:p-12 text-center text-white">
+            <div className="mt-16 bg-gradient-to-r from-rdf-red to-rdf-red-dark rounded-3xl p-8 md:p-12 text-center text-white">
               <h2 className="font-serif text-3xl font-bold mb-4">
                 Ne manquez aucun direct !
               </h2>
